@@ -1,13 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import css from './ContactForm.module.css';
 import * as yup from 'yup';
-import { addContact } from '../../redux/contactsSlice';
-import { nanoid } from 'nanoid';
+import {apiPostContacts } from '../../redux/contactsOps';
 import { useDispatch } from 'react-redux';
 const initialValues = {
   name: '',
   number: '',
-  id: '',
 };
 
 const regex = /^(?=.*?[1-9])[0-9()-]+$/;
@@ -30,12 +28,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const onAddProfile = (formData, actions) => {
     actions.resetForm();
-    const finalUser = {
-      ...formData,
-      id: nanoid(),
-    };
-    const action = addContact(finalUser);
-    dispatch(action);
+    dispatch(apiPostContacts(formData));
   };
 
   return (
