@@ -11,7 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
   dispatch(apiGetContacts())
-})
+},[dispatch])
   return (
     <div>
       <h1>Phonebook</h1>
